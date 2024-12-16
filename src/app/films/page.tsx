@@ -29,7 +29,7 @@ export default function Films() {
 
   function displayFilmContent(filmDetails) {
     setFilm(filmDetails)
-    setSelected(filmDetails.episode_id)
+    setSelected(filmDetails.properties.episode_id)
   }
 
   return (
@@ -51,14 +51,14 @@ export default function Films() {
           <ul className="m-4">
             {films.map((film) => (
               <li key={film.uid}>
-                <FilmCard filmData={film.properties} selected={film.properties.episode_id === selected} onCardClick={() => displayFilmContent(film.properties)}/>
+                <FilmCard filmData={film.properties} selected={film.properties.episode_id === selected} onCardClick={() => displayFilmContent(film)}/>
               </li>
             ))}
           </ul>
         </div>
 
         <div className="films-container-right w-2/4">
-          {film && <FilmDetails film={film}/>}
+          {film && <FilmDetails film={film.properties} uid={film.uid}/>}
         </div>
       </div>
     </div>
