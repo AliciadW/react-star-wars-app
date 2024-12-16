@@ -26,7 +26,7 @@ export default function Characters() {
 
   if (!film) return <div>Loading...</div>
 
-  if (film.properties.characters) {
+  if (film?.properties?.characters) {
     const filmCharacters = film.properties.characters
 
     // loop through character urls, get ids for all
