@@ -9,8 +9,8 @@ import CharacterCard from '@/app/components/CharacterCard';
 export default function Characters() {
   const params = useSearchParams()
   const filmId = params.get('film')
+  const characterIds = []
   const [film, setFilm] = useState(null)
-  const [characterIds, setCharacterIds] = useState([])
 
   useEffect(() => {
     async function fetchFilm() {
