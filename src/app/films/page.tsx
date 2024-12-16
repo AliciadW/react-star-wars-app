@@ -8,11 +8,17 @@ import FilmDetails from '@/app/components/FilmDetails';
 
 import "@/styles/films.css"
 
+// TODO: add in proper types
+/* eslint-disable  @typescript-eslint/no-explicit-any */
+export interface DefaultType {
+  [key: string]: any;
+}
+
 export default function Films() {
 
-  const [films, setFilms] = useState(null)
-  const [film, setFilm] = useState(null)
-  const [selected, setSelected] = useState(null)
+  const [films, setFilms] = useState<DefaultType>([])
+  const [film, setFilm] = useState<DefaultType | null>(null)
+  const [selected, setSelected] = useState<string>('')
 
   useEffect(() => {
     async function fetchFilms() {
@@ -25,9 +31,10 @@ export default function Films() {
     fetchFilms()
   }, []);
 
-  if(!films) return <div>Loading...</div>
 
-  function displayFilmContent(filmDetails) {
+  if (!films) return <div>Loading...</div>
+
+  function displayFilmContent(filmDetails:DefaultType) {
     setFilm(filmDetails)
     setSelected(filmDetails.properties.episode_id)
   }
@@ -49,7 +56,7 @@ export default function Films() {
       <div className="flex gap-4 items-center w-full">
         <div className="films-container-left w-2/4">
           <ul className="m-4">
-            {films.map((film) => (
+            {films.map((film: DefaultType) => (
               <li key={film.uid}>
                 <FilmCard filmData={film.properties} selected={film.properties.episode_id === selected} onCardClick={() => displayFilmContent(film)}/>
               </li>

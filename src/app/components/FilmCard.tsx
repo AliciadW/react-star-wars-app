@@ -1,7 +1,8 @@
-export default function FilmCard({ filmData, onCardClick, selected }) {
+/* eslint-disable  @typescript-eslint/no-explicit-any */
+export default function FilmCard({ filmData, onCardClick, selected }: {filmData: any, onCardClick: any, selected: boolean}) {
   const isSelected = selected ? 'bg-cardBackgroundSelected' : 'bg-cardBackground'
 
-  function displayDate(date) {
+  function displayDate(date: string) {
     return date?.split('-')[0] || ''
   }
 

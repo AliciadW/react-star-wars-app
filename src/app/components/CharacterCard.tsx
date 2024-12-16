@@ -2,8 +2,14 @@
 
 import { useState, useEffect } from 'react'
 
-export default function CharacterCard({characterId}) {
-  const [character, setCharacter] = useState(null)
+// TODO: add in proper types
+/* eslint-disable  @typescript-eslint/no-explicit-any */
+export interface DefaultType {
+  [key: string]: any;
+}
+
+export default function CharacterCard({ characterId }: {characterId: string}) {
+  const [character, setCharacter] = useState<DefaultType | null>(null)
 
   useEffect(() => {
     async function fetchCharacter() {

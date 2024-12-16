@@ -2,8 +2,14 @@
 
 import { useState, useEffect } from 'react'
 
-export default function PlanetCard({planetId}) {
-  const [planet, setPlanet] = useState(null)
+// TODO: add in proper types
+/* eslint-disable  @typescript-eslint/no-explicit-any */
+export interface DefaultType {
+  [key: string]: any;
+}
+
+export default function PlanetCard({planetId}: {planetId: string}) {
+  const [planet, setPlanet] = useState<DefaultType | null>(null)
 
   useEffect(() => {
     async function fetchPlanet() {
@@ -15,6 +21,8 @@ export default function PlanetCard({planetId}) {
 
     fetchPlanet()
   }, []);
+
+  if (!planet) return <div>Loading...</div>
 
   return (
     <div className="flex flex-col border border-cardBackground rounded-md p-2 m-2">

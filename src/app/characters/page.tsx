@@ -1,16 +1,22 @@
 'use client'
 
 import { useSearchParams } from 'next/navigation'
-import { useState, useEffect } from 'react'
+import { useState, useEffect, Suspense } from 'react'
 
 import Image from 'next/image';
 import CharacterCard from '@/app/components/CharacterCard';
 
-export default function Characters() {
+// TODO: add in proper types
+/* eslint-disable  @typescript-eslint/no-explicit-any */
+export interface DefaultType {
+  [key: string]: any;
+}
+
+function CharacterMain () {
   const params = useSearchParams()
   const filmId = params.get('film')
   const characterIds: string[] = []
-  const [film, setFilm] = useState(null)
+  const [film, setFilm] = useState<DefaultType | null>(null)
 
   useEffect(() => {
     async function fetchFilm() {
@@ -22,7 +28,6 @@ export default function Characters() {
 
     fetchFilm()
   }, []);
-
 
   if (!film) return <div>Loading...</div>
 
@@ -38,20 +43,30 @@ export default function Characters() {
   // TODO: paginate; for now only get first 5
 
   return (
-    <div className="flex flex-col items-center">
-      <div className="flex items-center">
-        <Image src="/icons8.svg" alt="" width={50} height={50}/>
-        <h2 className="text-xl font-bold mx-3">Characters {film && `in ${film.properties.title}`}</h2>
-        <Image src="/icons8.svg" alt="" width={50} height={50}/>
-      </div>
+    <Suspense>
+      <div className="flex flex-col items-center">
+        <div className="flex items-center">
+          <Image src="/icons8.svg" alt="" width={50} height={50}/>
+          <h2 className="text-xl font-bold mx-3">Characters {film && `in ${film.properties.title}`}</h2>
+          <Image src="/icons8.svg" alt="" width={50} height={50}/>
+        </div>
 
-      <ul className="m-4">
-        {characterIds.slice(0, 5).map((characterId, index) => (
-          <li key={index}>
-            <CharacterCard characterId={characterId}/>
-          </li>
-        ))}
-      </ul>
-    </div>
+        <ul className="m-4">
+          {characterIds.slice(0, 5).map((characterId: string, index: number) => (
+            <li key={index}>
+              <CharacterCard characterId={characterId}/>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </Suspense>
+  )
+}
+
+export default function Characters() {
+  return (
+    <Suspense>
+      <CharacterMain />
+    </Suspense>
   )
 }
