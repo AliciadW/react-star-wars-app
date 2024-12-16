@@ -18,10 +18,8 @@ export default function Home() {
         />
 
         <div className="flex items-center flex-col">
-          <p>Select you starting point</p>
           <div className="flex gap-4 items-center">
-            <button type="button" onClick={() => router.push('/films')} >Films</button>
-            <button type="button" onClick={() => router.push('/planets')}>Planets</button>
+            <button type="button" className="text-lg font-bold" onClick={() => router.push('/films')} >Films</button>
           </div>
         </div>
       </main>

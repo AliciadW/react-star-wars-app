@@ -31,13 +31,19 @@ export default function Films() {
   }
 
   return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
+    <div
+      className="grid grid-rows-[15px_1fr_15px] items-center justify-items-center min-h-screen p-8 pb-10 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
 
-      <div className="flex items-center">
-        <Image src='/icons8.svg' alt='' width={50} height={50} />
-        <h2 className='text-xl font-bold mx-3'>FILMS</h2>
-        <Image src='/icons8.svg' alt='' width={50} height={50} />
+      <div className="flex flex-col items-center">
+        <div className="flex items-center">
+          <Image src="/icons8.svg" alt="" width={50} height={50}/>
+          <h2 className="text-xl font-bold mx-3">FILMS</h2>
+          <Image src="/icons8.svg" alt="" width={50} height={50}/>
+        </div>
+
+        <p className="text-lg font-bold my-8">Select a film to see more details about it.</p>
       </div>
+
 
       <div className="flex gap-4 items-center w-full">
         <div className="films-container-left w-2/4">
@@ -51,7 +57,7 @@ export default function Films() {
         </div>
 
         <div className="films-container-right w-2/4">
-          {film && <FilmDetails film={film} />}
+          {film && <FilmDetails film={film}/>}
         </div>
       </div>
     </div>
