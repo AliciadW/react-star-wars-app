@@ -12,6 +12,7 @@ export default function Films() {
 
   const [films, setFilms] = useState(null)
   const [film, setFilm] = useState(null)
+  const [selected, setSelected] = useState(null)
 
   useEffect(() => {
     async function fetchFilms() {
@@ -28,6 +29,7 @@ export default function Films() {
 
   function displayFilmContent(filmDetails) {
     setFilm(filmDetails)
+    setSelected(filmDetails.episode_id)
   }
 
   return (
@@ -44,13 +46,12 @@ export default function Films() {
         <p className="text-lg font-bold my-8">Select a film to see more details about it.</p>
       </div>
 
-
       <div className="flex gap-4 items-center w-full">
         <div className="films-container-left w-2/4">
           <ul className="m-4">
             {films.map((film) => (
               <li key={film.uid}>
-                <FilmCard filmData={film.properties} onCardClick={() => displayFilmContent(film.properties)}/>
+                <FilmCard filmData={film.properties} selected={film.properties.episode_id === selected} onCardClick={() => displayFilmContent(film.properties)}/>
               </li>
             ))}
           </ul>

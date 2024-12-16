@@ -12,7 +12,8 @@ export default {
         background: "var(--background)",
         foreground: "var(--foreground)",
         cardBackground: '#9d9974',
-        cardBackgroundHover: '#a6a381'
+        cardBackgroundHover: '#a6a381',
+        cardBackgroundSelected: '#c4c1ab'
       },
     },
   },
